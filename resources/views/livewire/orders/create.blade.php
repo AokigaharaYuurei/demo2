@@ -21,7 +21,6 @@ new class extends Component {
             'payment' => 'required|in:наличными,банковская карта,безналичный расчет',
         ]);
 
-        // Получаем статус "новая" или создаем его, если не существует
         $status = Status::firstOrCreate(['title' => 'новая']);
 
         Order::create([
@@ -31,7 +30,7 @@ new class extends Component {
             'time' => $validated['time'],
             'payment' => $validated['payment'],
             'user_id' => auth()->id(),
-            'status_id' => $status->id, // Используем ID найденного/созданного статуса
+            'status_id' => $status->id, 
         ]);
 
         $this->reset();
